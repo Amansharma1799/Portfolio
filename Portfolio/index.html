@@ -1,0 +1,511 @@
+<!-- Save this as index.html and open in browser -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Aman Sharma — Aspiring Data Scientist</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000007;
+  --panel:#07101a;
+  --neon1:#00f5d4; /* cyan-green */
+  --neon2:#00d4ff; /* cyan */
+  --muted:#86a0b3;
+  --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:
+    radial-gradient(900px 420px at 10% 8%, rgba(0,245,212,0.02), transparent),
+    linear-gradient(180deg,var(--bg), #000815);
+  color:#e8ffff;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+.container{max-width:1100px;margin:0 auto;padding:28px;position:relative;z-index:5}
+header{position:fixed;left:0;right:0;top:14px;display:flex;justify-content:center;z-index:60}
+.topbar{width:95%;max-width:1100px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px 16px;border-radius:12px;display:flex;align-items:center;gap:12px;backdrop-filter:blur(6px);box-shadow:0 8px 30px rgba(0,0,0,0.7)}
+.brand{font-family:Orbitron, sans-serif; font-weight:700; letter-spacing:1px; color:var(--neon1); font-size:18px}
+nav{margin-left:auto;display:flex;gap:10px;align-items:center}
+nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600;transition:all .18s}
+nav a:hover{color:#fff; text-shadow:0 0 8px rgba(0,224,255,0.85); transform:translateY(-2px) scale(1.02)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:center;padding-top:86px}
+h1{font-family:Orbitron, sans-serif;font-size:42px;margin:0 0 8px;color:var(--neon2);text-shadow:0 0 10px rgba(0,212,255,0.10)}
+.subtitle{color:var(--muted);margin-bottom:18px}
+.cta{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(90deg,var(--neon1),var(--neon2));color:#001818;font-weight:800;text-decoration:none;box-shadow:0 8px 30px rgba(0,245,212,0.06);transition:transform .16s}
+.cta:hover{transform:translateY(-4px) scale(1.03)}
+.meta-row{display:flex;gap:12px;align-items:center;color:var(--muted);font-weight:600; margin-top:8px}
+
+/* card */
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));padding:18px;border-radius:14px;border:1px solid rgba(0,255,220,0.04); box-shadow:0 20px 60px rgba(0,0,0,0.7);position:relative;overflow:hidden; transition:transform .18s, box-shadow .18s;}
+.card:hover{transform:translateY(-8px) scale(1.01)}
+.avatar{width:84px;height:84px;border-radius:12px;background:linear-gradient(135deg,var(--neon1),var(--neon2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#001818;font-size:30px}
+
+/* skills pills */
+.skill-grid{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.pill{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(255,255,255,0.03); padding:10px 12px;border-radius:999px;font-weight:700;color:#e8ffff; font-size:14px;min-height:44px;transition:transform .14s}
+.pill svg{width:28px;height:28px;flex-shrink:0;}
+
+/* skill bars with icon */
+.skill-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.skill-name{width:170px;display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:700}
+.skill-name svg{width:24px;height:24px}
+.bar{flex:1;background:rgba(255,255,255,0.02);height:12px;border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--neon1),var(--neon2));transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.2,.9,.2,1)}
+
+/* projects */
+.section-title{margin-bottom:12px;color:var(--neon2);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.proj{background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(0,255,220,0.03);overflow:hidden;position:relative;transition:transform .18s, box-shadow .18s}
+.proj:hover{transform:translateY(-10px) scale(1.02); box-shadow: 0 18px 60px rgba(0,240,210,0.06)}
+.proj .logo{width:44px;height:44px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;margin-right:10px}
+.taglist{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.t{background:transparent;border:1px solid rgba(0,255,220,0.04);padding:6px 8px;border-radius:8px;color:var(--neon2);font-weight:700;font-size:12px}
+
+/* certificates */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px}
+.cert{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+
+/* buttons */
+.btn-neon{background:transparent;border:1px solid rgba(0,255,220,0.12);padding:8px 12px;border-radius:10px;color:var(--neon2);font-weight:800;cursor:pointer;transition:transform .14s, box-shadow .14s}
+.btn-neon:hover{transform:translateY(-6px); box-shadow:0 8px 40px rgba(0,240,210,0.12), 0 0 18px rgba(0,224,255,0.06)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;z-index:140;opacity:0;pointer-events:none;transition:all .18s}
+.modal.show{opacity:1;pointer-events:auto}
+.modal-card{background:#000814;padding:18px;border-radius:12px;border:1px solid rgba(0,255,220,0.04);max-width:780px;width:94%}
+.close{position:absolute;right:16px;top:14px;color:var(--muted);cursor:pointer}
+
+/* footer */
+footer{margin:40px 0 20px;color:var(--muted);text-align:center;font-size:14px;padding-bottom:60px}
+
+/* responsiveness */
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr;gap:18px}
+  .hero-left{order:2}
+  .card{order:1}
+}
+</style>
+</head>
+<body>
+
+<!-- subtle particle canvas -->
+<canvas id="bgCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none"></canvas>
+
+<header>
+  <div class="topbar">
+    <div class="brand">AMAN SHARMA</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#certs">Certifications</a>
+      <a href="#contact">Contact</a>
+      <a class="cta" href="#contact">Hire / DM</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--neon1);box-shadow:0 0 20px rgba(0,240,210,0.1)"></div>
+        <div style="color:var(--muted);font-weight:700">Aspiring Data Scientist • ML Engineer skills</div>
+      </div>
+
+      <h1>Aman Sharma</h1>
+      <div class="subtitle">BCA (AI & ML) student — building data products, visualisations, ML models and pipelines with production-minded practices.</div>
+
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+        <a class="cta" href="#projects">Explore Projects</a>
+        <div class="meta-row"><div style="color:var(--muted)">Location: Noida, Uttar Pradesh</div><div style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:0.04"></div><div style="color:var(--muted)">Email: <b style="color:#fff">amansharmabasai@gmail.com</b></div></div>
+      </div>
+
+      <!-- SKILLS pills with SVG logos (realistic-looking) -->
+      <div class="skill-grid" aria-hidden="true">
+        <!-- Python -->
+        <div class="pill" title="Python">
+          <!-- Python SVG (stylized snake colors) -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <defs><linearGradient id="pyg" x1="0" x2="1"><stop offset="0" stop-color="#306998"/><stop offset="1" stop-color="#ffd43b"/></linearGradient></defs>
+            <rect rx="8" width="64" height="64" fill="transparent"/>
+            <path d="M18 6c-6 0-10 4-10 10v8h14v2H8v10c0 6 4 10 10 10h6v6h12v-6h6c6 0 10-4 10-10V24H40v-2h14V12c0-6-4-10-10-10H18z" fill="url(#pyg)"/>
+          </svg>
+          Python
+        </div>
+
+        <!-- SQL (database icon) -->
+        <div class="pill" title="SQL">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <ellipse cx="32" cy="12" rx="20" ry="8" fill="#4b5563"/>
+            <path d="M12 12v28c0 4 9 8 20 8s20-4 20-8V12" fill="#0ea5a3" opacity="0.12"/>
+            <ellipse cx="32" cy="40" rx="20" ry="8" fill="#0ea5a3" opacity="0.9"/>
+          </svg>
+          SQL
+        </div>
+
+        <!-- Power BI (yellow chart) -->
+        <div class="pill" title="Power BI">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <rect x="6" y="16" width="10" height="34" rx="2" fill="#f7b500"/>
+            <rect x="22" y="12" width="10" height="38" rx="2" fill="#ffda6a"/>
+            <rect x="38" y="8" width="10" height="42" rx="2" fill="#f7b500"/>
+            <rect x="54" y="4" width="4" height="46" rx="2" fill="#ffd37a"/>
+          </svg>
+          Power BI
+        </div>
+
+        <!-- Tableau (stylized dots) -->
+        <div class="pill" title="Tableau">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <g transform="translate(8,8)">
+              <circle cx="8" cy="8" r="4" fill="#e97600"/>
+              <circle cx="24" cy="8" r="4" fill="#00a3e0"/>
+              <circle cx="40" cy="8" r="4" fill="#f4c20d"/>
+              <circle cx="8" cy="24" r="4" fill="#9b59b6"/>
+              <circle cx="24" cy="24" r="4" fill="#2ecc71"/>
+              <circle cx="40" cy="24" r="4" fill="#f44336"/>
+            </g>
+          </svg>
+          Tableau
+        </div>
+
+        <!-- Pandas (dataframe-like icon) -->
+        <div class="pill" title="Pandas / Pandas style">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <rect x="8" y="12" width="48" height="40" rx="4" fill="#1f2937"/>
+            <path d="M12 18h40v6H12zM12 30h40v6H12zM12 42h40v6H12z" fill="#60a5fa"/>
+          </svg>
+          Pandas
+        </div>
+
+        <!-- Scikit-learn (ML icon) -->
+        <div class="pill" title="Scikit-learn">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <circle cx="16" cy="32" r="8" fill="#4f46e5"/>
+            <circle cx="32" cy="20" r="6" fill="#60a5fa"/>
+            <rect x="38" y="12" width="18" height="40" rx="6" fill="#34d399"/>
+          </svg>
+          Scikit-learn
+        </div>
+
+        <!-- NLP -->
+        <div class="pill" title="NLP">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <circle cx="32" cy="20" r="10" fill="#f97316"/>
+            <path d="M16 40c6-6 16-6 22 0" stroke="#ffd580" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <rect x="6" y="44" width="52" height="8" rx="4" fill="#111827" opacity="0.6"/>
+          </svg>
+          NLP
+        </div>
+
+        <!-- Prompt Engineering -->
+        <div class="pill" title="Prompt Engineering">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <path d="M32 6 L38 24 L56 24 L40 36 L46 54 L32 42 L18 54 L24 36 L8 24 L26 24 Z" fill="#8b5cf6"/>
+          </svg>
+          Prompt Eng.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: profile card with skill bars + icons -->
+    <div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div class="avatar">A</div>
+          <div>
+            <h3 style="margin:0">Aman Sharma</h3>
+            <p style="margin:6px 0 0;color:var(--muted);font-size:13px">Aspiring Data Scientist — BCA (AI & ML)</p>
+          </div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="color:var(--muted);font-weight:700">Primary goal</div>
+            <div style="color:var(--neon1);font-weight:800">Data Scientist</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <div class="skill-row"><div class="skill-name">
+              <!-- Python icon small -->
+              <svg viewBox="0 0 24 24" width="24" height="24"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#306998"/><stop offset="1" stop-color="#ffd43b"/></linearGradient></defs><path d="M4 2c-2 0-2 2-2 4v3h6v1H2v5c0 4 3 6 6 6h3v3h6v-3h3c3 0 6-2 6-6V9h-6V8h6V6c0-2-2-4-4-4H4z" fill="url(#g1)"/></svg>
+              Python
+            </div><div class="bar"><div class="fill" data-val="0.92"></div></div></div>
+
+            <div class="skill-row"><div class="skill-name">
+              <svg viewBox="0 0 24 24" width="24" height="24"><rect x="2" y="2" width="20" height="20" rx="4" fill="#60a5fa"/></svg>
+              Machine Learning
+            </div><div class="bar"><div class="fill" data-val="0.85"></div></div></div>
+
+            <div class="skill-row"><div class="skill-name">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path d="M3 3h18v18H3z" fill="#f7b500"/></svg>
+              Data Viz / BI
+            </div><div class="bar"><div class="fill" data-val="0.82"></div></div></div>
+
+            <div class="skill-row"><div class="skill-name">
+              <svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="7" r="4" fill="#f97316"/></svg>
+              NLP
+            </div><div class="bar"><div class="fill" data-val="0.78"></div></div></div>
+          </div>
+
+          <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+            <a class="pill" href="https://github.com/Amansharma1799" target="_blank"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.1 6.9 9.4.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.3-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.5-1.3.1-2.6 0 0 .8-.3 2.8 1 .8-.2 1.6-.3 2.4-.3.8 0 1.6.1 2.4.3 2-.1 2.8-1 2.8-1 .6 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.4.8 1.1.8 2.2v3.3c0 .3.2.6.7.5C19.1 20.1 22 16.4 22 12 22 6.5 17.5 2 12 2z" fill="#e8faff"/></svg> GitHub</a>
+            <a class="pill" href="https://www.linkedin.com/in/aman-sharma-6bb158331/" target="_blank"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="3" fill="#0ea5a3"/></svg> LinkedIn</a>
+            <a class="pill" href="mailto:amansharmabasai@gmail.com"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="6" width="20" height="12" rx="2" fill="#ffd580"/></svg> Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+      <div style="flex:1;min-width:320px">
+        <div class="card">
+          <p style="margin:0;color:var(--muted)"><strong style="color:#fff">I’m Aman Sharma</strong>, a BCA (AI & ML) student from Noida. I build data-driven solutions — EDA, dashboards, ML models, and NLP pipelines. I highlight both Data Scientist and Machine Learning Engineer capabilities: model building, evaluation, and reproducible pipelines.</p>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <div class="pill"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 4h16v16H4z" fill="#60a5fa"/></svg> Feature Engineering</div>
+            <div class="pill"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 4h16v16H4z" fill="#34d399"/></svg> Model Evaluation</div>
+            <div class="pill"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 4h16v16H4z" fill="#f7b500"/></svg> Deployment-ready</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:320px;min-width:260px">
+        <div class="card">
+          <h4 style="margin:0 0 8px">Highlights</h4>
+          <div style="color:var(--muted);font-size:13px">
+            <ul>
+              <li>Skills: Python, Power BI, Tableau, SQL, Pandas, Scikit-learn, NLTK, TextBlob, Prompt Engineering.</li>
+              <li>Goal: Data Scientist roles; also prepared for ML Engineer responsibilities.</li>
+              <li>Location: Noida, Uttar Pradesh — open to remote / hybrid roles.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="grid">
+      <!-- Fake News -->
+      <div class="proj" data-proj='{"title":"Fake News Detection","desc":"Binary classification using TF-IDF + PassiveAggressiveClassifier (~95% accuracy). EDA, lemmatization, visualisations.","tech":["Python","NLP","Scikit-Learn"]}'>
+        <div style="display:flex;align-items:center">
+          <div class="logo" aria-hidden>
+            <!-- small Python logo -->
+            <svg viewBox="0 0 64 64" width="44" height="44"><defs><linearGradient id="pyg2" x1="0" x2="1"><stop offset="0" stop-color="#306998"/><stop offset="1" stop-color="#ffd43b"/></linearGradient></defs><path d="M6 8c0 0 6-6 24-6 18 0 24 6 24 6v18h-14v-2h12V12c0-6-4-10-10-10H6z" fill="url(#pyg2)"/></svg>
+          </div>
+          <div>
+            <h4 style="margin:0 0 6px">Fake News Detection (NLP)</h4>
+            <p style="margin:0;color:var(--muted);font-size:13px">TF-IDF, text preprocessing, PassiveAggressiveClassifier and reproducible notebooks.</p>
+            <div class="taglist"><div class="t">Python</div><div class="t">NLP</div><div class="t">ML</div></div>
+          </div>
+        </div>
+        <div style="margin-top:12px"><button class="btn-neon" onclick="openProj(this)">Details</button> <a href="https://github.com/Amansharma1799" target="_blank" style="margin-left:10px;color:var(--muted);text-decoration:none">Repo</a></div>
+      </div>
+
+      <!-- Web Series Dashboard -->
+      <div class="proj" data-proj='{"title":"Web Series Dashboard","desc":"Tableau interactive dashboard analysing viewer preferences across genres & platforms.","tech":["Tableau","Data Viz"]}'>
+        <div style="display:flex;align-items:center">
+          <div class="logo" aria-hidden>
+            <!-- tableau-like dots -->
+            <svg viewBox="0 0 64 64" width="44" height="44"><g transform="translate(8,8)"><circle cx="8" cy="8" r="4" fill="#e97600"/><circle cx="24" cy="8" r="4" fill="#00a3e0"/><circle cx="40" cy="8" r="4" fill="#f4c20d"/><circle cx="8" cy="24" r="4" fill="#9b59b6"/><circle cx="24" cy="24" r="4" fill="#2ecc71"/><circle cx="40" cy="24" r="4" fill="#f44336"/></g></svg>
+          </div>
+          <div>
+            <h4 style="margin:0 0 6px">Web Series Dashboard</h4>
+            <p style="margin:0;color:var(--muted);font-size:13px">Interactive Tableau visuals with filters & trend analysis for content insights.</p>
+            <div class="taglist"><div class="t">Tableau</div><div class="t">Dashboards</div></div>
+          </div>
+        </div>
+        <div style="margin-top:12px"><button class="btn-neon" onclick="openProj(this)">Details</button> <a href="https://github.com/Amansharma1799" target="_blank" style="margin-left:10px;color:var(--muted);text-decoration:none">Repo</a></div>
+      </div>
+
+      <!-- Sales Dashboard -->
+      <div class="proj" data-proj='{"title":"Sales Dashboard (Excel)","desc":"Dynamic Excel dashboards using PivotTables, slicers & conditional formatting.","tech":["Excel","Dashboards"]}'>
+        <div style="display:flex;align-items:center">
+          <div class="logo" aria-hidden>
+            <!-- excel-like bars -->
+            <svg viewBox="0 0 64 64" width="44" height="44"><rect x="6" y="24" width="10" height="30" rx="2" fill="#10b981"/><rect x="24" y="12" width="10" height="42" rx="2" fill="#34d399"/><rect x="42" y="6" width="10" height="48" rx="2" fill="#6ee7b7"/></svg>
+          </div>
+          <div>
+            <h4 style="margin:0 0 6px">Sales Dashboard (Excel)</h4>
+            <p style="margin:0;color:var(--muted);font-size:13px">Pivot-driven dynamic dashboards for region/product/month analysis and automation tips.</p>
+            <div class="taglist"><div class="t">Excel</div><div class="t">Dashboards</div></div>
+          </div>
+        </div>
+        <div style="margin-top:12px"><button class="btn-neon" onclick="openProj(this)">Details</button> <a href="https://github.com/Amansharma1799" target="_blank" style="margin-left:10px;color:var(--muted);text-decoration:none">Repo</a></div>
+      </div>
+
+      <!-- NCERT Study Planner -->
+      <div class="proj" data-proj='{"title":"NCERT Study Planner","desc":"Text extraction to JSON/Excel and a planner generator for NCERT content.","tech":["Python","Automation"]}'>
+        <div style="display:flex;align-items:center">
+          <div class="logo" aria-hidden>
+            <svg viewBox="0 0 64 64" width="44" height="44"><rect x="6" y="10" width="52" height="44" rx="4" fill="#111827"/><path d="M12 16h40v4H12zM12 26h40v4H12z" fill="#60a5fa"/></svg>
+          </div>
+          <div>
+            <h4 style="margin:0 0 6px">NCERT Study Planner</h4>
+            <p style="margin:0;color:var(--muted);font-size:13px">Automated text extraction & planner generation — JSON/Excel outputs for educational pipelines.</p>
+            <div class="taglist"><div class="t">Python</div><div class="t">Automation</div></div>
+          </div>
+        </div>
+        <div style="margin-top:12px"><button class="btn-neon" onclick="openProj(this)">Details</button> <a href="https://github.com/Amansharma1799/ncert-study-planner" target="_blank" style="margin-left:10px;color:var(--muted);text-decoration:none">Repo</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs">
+    <h2 class="section-title">Certifications</h2>
+    <div class="cert-grid">
+      <div class="cert"><svg viewBox="0 0 24 24" width="28" height="28"><circle cx="12" cy="12" r="10" fill="#06b6d4"/></svg><div><b>GenAI-Powered Data Analytics</b><div style="color:var(--muted);font-size:13px">Forage (Tata iQ)</div></div></div>
+      <div class="cert"><svg viewBox="0 0 24 24" width="28" height="28"><rect x="2" y="2" width="20" height="20" rx="3" fill="#60a5fa"/></svg><div><b>Data Analyst Certification</b><div style="color:var(--muted);font-size:13px">PW Skills</div></div></div>
+      <div class="cert"><svg viewBox="0 0 24 24" width="28" height="28"><rect x="2" y="2" width="20" height="20" rx="3" fill="#f7b500"/></svg><div><b>Power BI Mastery</b><div style="color:var(--muted);font-size:13px">LCMGO</div></div></div>
+      <div class="cert"><svg viewBox="0 0 24 24" width="28" height="28"><rect x="2" y="2" width="20" height="20" rx="3" fill="#8b5cf6"/></svg><div><b>Python (Advanced)</b><div style="color:var(--muted);font-size:13px">LearnTube | NIEST</div></div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
+      <div style="flex:1;min-width:260px">
+        <div class="card">
+          <h4 style="margin:0 0 8px">Reach out</h4>
+          <p style="margin:0 0 12px;color:var(--muted)">Open to Data Scientist / ML Engineer roles & internships. Let's connect — remote / hybrid considered.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a class="pill" href="mailto:amansharmabasai@gmail.com"> <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="6" width="20" height="12" rx="2" fill="#ffd580"/></svg> amansharmabasai@gmail.com</a>
+            <a class="pill" href="https://github.com/Amansharma1799" target="_blank"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.1 6.9 9.4.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.3-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.5-1.3.1-2.6 0 0 .8-.3 2.8 1 .8-.2 1.6-.3 2.4-.3.8 0 1.6.1 2.4.3 2-.1 2.8-1 2.8-1 .6 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.4.8 1.1.8 2.2v3.3c0 .3.2.6.7.5C19.1 20.1 22 16.4 22 12 22 6.5 17.5 2 12 2z" fill="#e8faff"/></svg> GitHub</a>
+            <a class="pill" href="https://www.linkedin.com/in/aman-sharma-6bb158331/" target="_blank"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="3" fill="#0ea5a3"/></svg> LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="min-width:260px">
+        <div class="card">
+          <h4 style="margin:0 0 8px">Resume</h4>
+          <p style="margin:0 0 12px;color:var(--muted)">Download summary or request full PDF via email.</p>
+          <div style="display:flex;gap:8px">
+            <button class="btn-neon" onclick="downloadResume()">Download Summary</button>
+            <button class="btn-neon" onclick="scrollTo('#projects')">View Projects</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> Aman Sharma — Aspiring Data Scientist</footer>
+</div>
+
+<!-- modal -->
+<div id="modal" class="modal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <h3 id="mTitle" style="margin:0;color:var(--neon1)"></h3>
+        <div id="mTech" style="color:var(--muted);font-size:13px;margin-top:6px"></div>
+      </div>
+      <div class="close" onclick="closeModal()">✕</div>
+    </div>
+    <div id="mDesc" style="margin-top:12px;color:var(--muted)"></div>
+    <div id="mExtra" style="margin-top:12px"></div>
+  </div>
+</div>
+
+<script>
+/* --- Basic interactivity & particles --- */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* particles */
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let W = innerWidth, H = innerHeight;
+function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; }
+window.addEventListener('resize', resize); resize();
+const parts = [];
+function rand(a,b){ return Math.random()*(b-a)+a; }
+for(let i=0;i<90;i++){
+  parts.push({x:rand(0,W), y:rand(0,H), r:rand(0.6,2.4), vx:rand(-0.2,0.2), vy:rand(-0.12,0.12), hue:rand(170,200), a:rand(0.03,0.12)});
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  parts.forEach(p=>{
+    p.x += p.vx; p.y += p.vy;
+    if(p.x<0) p.x=W; if(p.x>W) p.x=0; if(p.y<0) p.y=H; if(p.y>H) p.y=0;
+    ctx.beginPath();
+    ctx.fillStyle = `hsla(${p.hue},90%,60%,${p.a})`;
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* reveal skill bars */
+document.querySelectorAll('.fill').forEach((f,i)=>{
+  const v = parseFloat(f.getAttribute('data-val')) || 0.7;
+  setTimeout(()=> f.style.transform = `scaleX(${v})`, 600 + i*180);
+});
+
+/* project modal */
+function openProj(btn){
+  const proj = btn.closest('.proj');
+  const data = JSON.parse(proj.getAttribute('data-proj'));
+  document.getElementById('mTitle').textContent = data.title || 'Project';
+  document.getElementById('mDesc').textContent = data.desc || '';
+  document.getElementById('mTech').textContent = (data.tech || []).join(' • ');
+  const mExtra = document.getElementById('mExtra'); mExtra.innerHTML = '';
+  if(data.demo) mExtra.innerHTML += `<div style="margin-top:8px;color:var(--muted)"><b>Demo:</b> ${data.demo}</div>`;
+  if(data.repo) mExtra.innerHTML += `<div style="margin-top:8px"><a style="color:var(--neon1)" href="${data.repo}" target="_blank">Open Repo</a></div>`;
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){ document.getElementById('modal').classList.remove('show'); }
+document.getElementById('modal').addEventListener('click',(e)=>{ if(e.target===document.getElementById('modal')) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+/* small tilt on proj hover for depth */
+document.querySelectorAll('.proj').forEach(p=>{
+  p.addEventListener('mousemove', (e)=>{
+    const rect = p.getBoundingClientRect();
+    const rx = (e.clientX - rect.left - rect.width/2)/18;
+    const ry = (e.clientY - rect.top - rect.height/2)/28;
+    p.style.transform = `translate3d(${rx}px,${ry}px,0) scale(1.01)`;
+  });
+  p.addEventListener('mouseleave', ()=> p.style.transform = '');
+});
+
+/* simple reveal on scroll */
+const reveals = document.querySelectorAll('section, .card, .proj, .cert');
+function onScroll(){
+  const top = window.innerHeight;
+  reveals.forEach((r)=>{
+    const bb = r.getBoundingClientRect();
+    if(bb.top < top - 60) { r.style.opacity = 1; r.style.transform = 'translateY(0)'; }
+    else { r.style.opacity = 0; r.style.transform = 'translateY(18px)'; }
+  });
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+/* helpers */
+function scrollTo(sel){ document.querySelector(sel).scrollIntoView({behavior:'smooth', block:'start'}); }
+
+/* resume summary download */
+function downloadResume(){
+  const text = `Aman Sharma\nAspiring Data Scientist\nEmail: amansharmabasai@gmail.com\nGitHub: https://github.com/Amansharma1799\nLinkedIn: https://www.linkedin.com/in/aman-sharma-6bb158331/\n\nSkills: Python, SQL, Power BI, Tableau, Pandas, Scikit-learn, NLP, Prompt Engineering\nProjects: Fake News Detection; Web Series Dashboard; Sales Dashboard; NCERT Study Planner\nCertifications: GenAI-Powered Data Analytics; Data Analyst (PW Skills); Power BI Mastery; Python (Advanced)\n`;
+  const blob = new Blob([text], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'Aman_Sharma_Resume_Summary.txt'; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=> URL.revokeObjectURL(url), 2000);
+}
+</script>
+</body>
+</html>
